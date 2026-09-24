@@ -301,73 +301,44 @@ function createIcon(goal) {
 
 }
 
-
-// ========================================
-// 全ての観光スポットを地図に表示
-// ========================================
-
 goals.forEach(goal => {
-
     const marker = L.marker(
-
         [goal.lat, goal.lng],
-
         {
             icon: createIcon(goal)
         }
-
     );
 
-
     marker.addTo(map);
-
-
     marker.bindPopup(`
-
         <div class="popup">
-
             <div class="popup-icon">
                 ${goal.icon}
             </div>
-
             <div class="popup-name">
                 ${goal.name}
             </div>
-
             <div class="popup-category">
                 ${goal.category}
             </div>
-
             <button
                 class="popup-button"
                 onclick="selectGoal('${goal.name}')"
             >
                 🚶 ここまで案内
             </button>
-
         </div>
-
     `);
-
 
     marker.on("click", function() {
 
-        selectedGoal = goal;
-
-        startNavigation(goal);
-
     });
-
-
     markers.push({
-
         marker: marker,
-
         goal: goal
-
     });
-
 });
+
 
 
 // ========================================
@@ -996,128 +967,64 @@ categoryButtons.forEach(button => {
 
 });
 
-
-// ========================================
-// 現在地ボタン
-// ========================================
-
 document
-
     .getElementById("locationButton")
-
     .addEventListener(
-
         "click",
-
         function() {
 
             // 現在地がすでに取得できている
-
             if (currentPosition) {
-
                 map.setView(
-
                     [
-
                         currentPosition.lat,
-
                         currentPosition.lng
-
                     ],
-
                     17
-
                 );
-
                 return;
-
             }
-
 
             // GPSが使えない
-
             if (!navigator.geolocation) {
-
                 alert(
-
                     "位置情報を利用できません。"
-
                 );
-
                 return;
-
             }
 
-
             // 現在地取得
-
             navigator.geolocation.getCurrentPosition(
-
                 function(position) {
-
                     const lat =
                         position.coords.latitude;
-
                     const lng =
                         position.coords.longitude;
-
-
                     currentPosition = {
-
                         lat: lat,
-
                         lng: lng
-
                     };
-
-
                     updateCurrentMarker(
-
                         lat,
-
                         lng,
-
                         position.coords.accuracy
-
                     );
-
-
                     map.setView(
-
                         [lat, lng],
-
                         17
-
                     );
-
                 },
-
-
                 function(error) {
-
                     console.error(error);
-
-
                     alert(
-
                         "現在地を取得できませんでした。"
-
                     );
-
                 },
-
                 {
-
                     enableHighAccuracy: true,
-
                     timeout: 10000,
-
                     maximumAge: 0
-
                 }
-
             );
-
         }
-
     );
