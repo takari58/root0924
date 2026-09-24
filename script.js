@@ -579,392 +579,209 @@ function updateCurrentMarker(
 
     });
 
-
     // 初回
-
     if (!currentMarker) {
-
         currentMarker = L.marker(
-
             [lat, lng],
-
             {
                 icon: currentIcon
             }
-
         ).addTo(map);
-
-
         currentMarker.bindPopup(
-            "📍 現在地"
+           "📍 現在地"
         );
-
     }
 
     // 2回目以降
-
     else {
-
         currentMarker.setLatLng(
-
             [lat, lng]
-
         );
-
     }
-
 }
 
-
-// ========================================
-// ルート表示
-// ========================================
-
 async function showRoute(
-
     myLat,
-
     myLng,
-
     goal
-
 ) {
-
     const url =
-
         `https://router.project-osrm.org/route/v1/walking/` +
-
         `${myLng},${myLat};${goal.lng},${goal.lat}` +
-
         `?overview=full&geometries=geojson`;
 
-
     try {
-
         const response =
             await fetch(url);
-
 
         const data =
             await response.json();
 
-
         // ルートが存在しない
-
         if (
-
             !data.routes ||
-
             data.routes.length === 0
-
         ) {
 
             document
                 .getElementById("info")
                 .innerHTML = `
-
                     <div class="destination-name">
-
                         ${goal.icon}
-
                         ${goal.name}
-
                     </div>
-
                     <div class="route-error">
-
                         ⚠️ ルートが見つかりません
-
                     </div>
-
                 `;
-
             return;
-
         }
-
 
         const route =
             data.routes[0];
 
-
         // 古いルートを削除
-
         if (routeLine) {
-
             map.removeLayer(routeLine);
-
         }
 
-
         // GeoJSON → Leaflet形式
-
         const latlngs =
-
             route.geometry.coordinates.map(
-
                 point => [
-
                     point[1],
-
                     point[0]
-
                 ]
-
             );
-
 
         // 新しいルート
-
         routeLine = L.polyline(
-
             latlngs,
-
             {
-
                 color: "#1976d2",
-
                 weight: 7,
-
                 opacity: 0.85,
-
                 lineCap: "round",
-
                 lineJoin: "round"
-
             }
-
         ).addTo(map);
 
-
-        // ルート全体を表示
-
-        map.fitBounds(
-
-            routeLine.getBounds(),
-
-            {
-
-                padding: [50, 50]
-
-            }
-
-        );
-
-
         // 距離
-
         const distanceKm =
-
             (
-
                 route.distance / 1000
-
             ).toFixed(2);
 
-
         // メートル
-
         const distanceMeter =
-
             route.distance;
 
-
         // 徒歩時間
-
         const minutes =
-
             Math.max(
-
                 1,
-
                 Math.round(
-
                     distanceMeter / 66.67
-
                 )
-
             );
 
-
         // 情報表示
-
         document
-
             .getElementById("info")
-
             .innerHTML = `
-
                 <div class="destination-name">
-
                     ${goal.icon}
-
                     ${goal.name}
-
                 </div>
-
                 <div class="destination-category">
-
                     ${goal.category}
-
                 </div>
-
                 <div class="route-information">
-
                     <div>
-
                         🚶
-
                         <strong>
-
                             約 ${minutes} 分
-
                         </strong>
-
                     </div>
-
                     <div>
-
                         📏
-
                         <strong>
-
                             ${distanceKm} km
-
                         </strong>
-
                     </div>
-
                 </div>
-
                 <div class="route-message">
-
                     🧭 青い線に沿って進んでください
-
                 </div>
-
             `;
-
     }
-
 
     catch (error) {
-
         console.error(error);
-
-
         document
-
             .getElementById("info")
-
             .innerHTML = `
-
                 <div class="route-error">
-
                     ⚠️ ルート検索に失敗しました
-
                 </div>
 
             `;
-
     }
-
 }
 
-
-// ========================================
-// ジャンルフィルター
-// ========================================
-
 const categoryButtons =
-
     document.querySelectorAll(
-
         ".category-btn"
 
     );
 
-
 categoryButtons.forEach(button => {
-
     button.addEventListener(
-
         "click",
-
         function() {
-
             const category =
-
                 this.dataset.category;
 
-
             // ボタンの見た目を変更
-
             categoryButtons.forEach(
-
                 btn => {
-
                     btn.classList.remove(
                         "active"
                     );
-
                 }
-
             );
-
 
             this.classList.add(
                 "active"
             );
 
-
             // マーカー表示切り替え
-
             markers.forEach(item => {
-
                 const marker =
                     item.marker;
-
                 const goal =
                     item.goal;
 
-
                 if (
-
                     category === "all" ||
-
                     goal.category === category
-
                 ) {
-
                     if (
                         !map.hasLayer(marker)
                     ) {
-
                         marker.addTo(map);
-
                     }
-
                 }
-
                 else {
-
                     if (
                         map.hasLayer(marker)
                     ) {
-
                         map.removeLayer(marker);
-
                     }
-
                 }
-
             });
-
         }
-
     );
-
 });
 
 document
