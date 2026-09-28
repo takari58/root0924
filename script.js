@@ -44,7 +44,7 @@ const goals = [
         name: "諏訪神社",
         lat: 37.944214,
         lng: 139.332004,
-        category: "神社・寺",
+        category: "観光",
         icon: "⛩️"
     },
     {
@@ -73,7 +73,7 @@ const goals = [
         lat: 37.950246,
         lng: 139.338618,
         category: "公共施設",
-        icon: "🏛️"
+        icon: "🏃"
     },
     {
         name: "新発田駅",
@@ -86,7 +86,7 @@ const goals = [
         name: "あやめの湯",
         lat: 37.953545,
         lng: 139.3549475,
-        category: "温泉",
+        category: "公共施設",
         icon: "♨️"
     },
     {
@@ -114,7 +114,7 @@ const goals = [
         name: "旧新発田市役所",
         lat: 37.950883,
         lng: 139.327898,
-        category: "観光",
+        category: "公共施設",
         icon: "🏛️"
     },
     {
