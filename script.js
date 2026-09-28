@@ -136,7 +136,7 @@ const goals = [
         lat: 37.94039,
         lng: 139.336,
         category: "グルメ",
-        icon: "🍴"
+        icon: "🍞"
     },
     {
         name: "藤倉メンチカツや",
@@ -191,17 +191,11 @@ const goals = [
 ];
 
 const categoryColors = {
-
     "観光": "#f39c12",
-
     "神社・寺": "#8e44ad",
-
     "グルメ": "#e74c3c",
-
     "交通": "#3498db",
-
     "公共施設": "#27ae60",
-
     "温泉": "#00a8cc"
 
 };
