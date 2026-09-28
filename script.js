@@ -3,22 +3,12 @@ const map = L.map("map").setView(
     15
 );
 
-
-// ========================================
-// OpenStreetMap
-// ========================================
-
 L.tileLayer(
     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
     {
         attribution: "© OpenStreetMap contributors"
     }
 ).addTo(map);
-
-
-// ========================================
-// 観光スポットデータ
-// ========================================
 
 const goals = [
 
@@ -29,7 +19,6 @@ const goals = [
         category: "観光",
         icon: "🏯"
     },
-
     {
         name: "清水園",
         lat: 37.943791,
@@ -37,7 +26,6 @@ const goals = [
         category: "観光",
         icon: "🏯"
     },
-
     {
         name: "蔵春閣",
         lat: 37.9438980727356,
@@ -45,7 +33,6 @@ const goals = [
         category: "観光",
         icon: "🏯"
     },
-
     {
         name: "東公園のSL",
         lat: 37.9436724880776,
@@ -53,7 +40,6 @@ const goals = [
         category: "観光",
         icon: "🚂"
     },
-
     {
         name: "諏訪神社",
         lat: 37.944214,
@@ -61,7 +47,6 @@ const goals = [
         category: "神社・寺",
         icon: "⛩️"
     },
-
     {
         name: "新発田市役所",
         lat: 37.947839,
@@ -69,7 +54,6 @@ const goals = [
         category: "公共施設",
         icon: "🏛️"
     },
-
     {
         name: "王紋酒造",
         lat: 37.94436989072327,
@@ -77,7 +61,6 @@ const goals = [
         category: "観光",
         icon: "🍶"
     },
-
     {
         name: "五十公野公園",
         lat: 37.939869,
@@ -85,7 +68,6 @@ const goals = [
         category: "観光",
         icon: "🌳"
     },
-
     {
         name: "カルチャーセンター",
         lat: 37.950246,
@@ -93,7 +75,6 @@ const goals = [
         category: "公共施設",
         icon: "🏛️"
     },
-
     {
         name: "新発田駅",
         lat: 37.94413,
@@ -101,7 +82,6 @@ const goals = [
         category: "交通",
         icon: "🚉"
     },
-
     {
         name: "あやめの湯",
         lat: 37.953545,
@@ -109,7 +89,6 @@ const goals = [
         category: "温泉",
         icon: "♨️"
     },
-
     {
         name: "イクネスしばた",
         lat: 37.944357,
@@ -117,7 +96,6 @@ const goals = [
         category: "公共施設",
         icon: "📚"
     },
-
     {
         name: "市民文化会館",
         lat: 37.951722,
@@ -125,7 +103,6 @@ const goals = [
         category: "公共施設",
         icon: "🏛️"
     },
-
     {
         name: "新発田歴史図書館",
         lat: 37.951279909157336,
@@ -133,7 +110,6 @@ const goals = [
         category: "公共施設",
         icon: "📚"
     },
-
     {
         name: "旧新発田市役所",
         lat: 37.950883,
@@ -141,7 +117,6 @@ const goals = [
         category: "観光",
         icon: "🏛️"
     },
-
     {
         name: "新潟職能短大",
         lat: 37.956067,
@@ -149,7 +124,6 @@ const goals = [
         category: "公共施設",
         icon: "🏫"
     },
-
     {
         name: "菊水",
         lat: 37.960376479226,
@@ -157,7 +131,6 @@ const goals = [
         category: "グルメ",
         icon: "🍴"
     },
-
     {
         name: "ボン・タケダ",
         lat: 37.94039,
@@ -165,7 +138,6 @@ const goals = [
         category: "グルメ",
         icon: "🍴"
     },
-
     {
         name: "藤倉メンチカツや",
         lat: 37.93682,
@@ -173,7 +145,6 @@ const goals = [
         category: "グルメ",
         icon: "🍴"
     },
-
     {
         name: "いっぷく",
         lat: 37.9443765405075,
@@ -181,7 +152,6 @@ const goals = [
         category: "グルメ",
         icon: "🍴"
     },
-
     {
         name: "文化洋食ino",
         lat: 37.9623641139771,
@@ -189,7 +159,6 @@ const goals = [
         category: "グルメ",
         icon: "🍴"
     },
-
     {
         name: "やすけカレー",
         lat: 37.9377482726362,
@@ -197,7 +166,6 @@ const goals = [
         category: "グルメ",
         icon: "🍛"
     },
-
     {
         name: "レストラン蒲城",
         lat: 37.9504968436357,
@@ -205,7 +173,6 @@ const goals = [
         category: "グルメ",
         icon: "🍴"
     },
-
     {
         name: "コーヒーマリーナ 煉瓦屋",
         lat: 37.9491031178618,
@@ -213,7 +180,6 @@ const goals = [
         category: "グルメ",
         icon: "☕"
     },
-
     {
         name: "パーラーやお屋",
         lat: 37.958499803976,
@@ -223,11 +189,6 @@ const goals = [
     }
 
 ];
-
-
-// ========================================
-// ジャンルごとの色
-// ========================================
 
 const categoryColors = {
 
@@ -245,43 +206,20 @@ const categoryColors = {
 
 };
 
-
-// ========================================
-// 変数
-// ========================================
-
 let currentMarker = null;
-
 let routeLine = null;
-
 let watchId = null;
-
 let selectedGoal = null;
-
 let currentPosition = null;
-
-
-// ========================================
-// マーカーを管理する配列
-// ========================================
 
 const markers = [];
 
-
-// ========================================
 // カスタムアイコンを作成
-// ========================================
-
 function createIcon(goal) {
-
     const color =
         categoryColors[goal.category] || "#777";
-
-
     return L.divIcon({
-
         className: "custom-marker",
-
         html: `
             <div
                 class="marker-circle"
@@ -290,15 +228,10 @@ function createIcon(goal) {
                 ${goal.icon}
             </div>
         `,
-
         iconSize: [44, 44],
-
         iconAnchor: [22, 22],
-
         popupAnchor: [0, -24]
-
     });
-
 }
 
 goals.forEach(goal => {
@@ -339,244 +272,128 @@ goals.forEach(goal => {
     });
 });
 
-
-
-// ========================================
 // 目的地を選択
-// ========================================
-
 function selectGoal(name) {
-
     const goal = goals.find(
-
         item => item.name === name
-
     );
-
-
     if (!goal) {
-
         return;
-
     }
-
-
     selectedGoal = goal;
-
-
     startNavigation(goal);
-
 }
 
-
-// ========================================
-// ナビゲーション開始
-// ========================================
-
+//ナビ開始
 function startNavigation(goal) {
-
     selectedGoal = goal;
-
-
     document
         .getElementById("info")
         .innerHTML = `
-
             <div class="destination-name">
-
                 ${goal.icon}
-
                 ${goal.name}
-
             </div>
-
             <div class="destination-category">
-
                 ${goal.category}
-
             </div>
-
             <div class="loading-message">
-
                 📍 現在地を取得しています...
-
             </div>
-
         `;
 
-
     // すでに位置情報取得中なら再利用
-
     if (watchId !== null) {
-
         if (currentPosition) {
-
             showRoute(
-
                 currentPosition.lat,
-
                 currentPosition.lng,
-
                 goal
-
             );
-
         }
-
         return;
-
     }
 
-
     // 位置情報が使えるか確認
-
     if (!navigator.geolocation) {
-
         alert(
             "このブラウザでは位置情報を利用できません。"
         );
-
         return;
-
     }
-
-
+    
     // 現在地を監視
-
     watchId = navigator.geolocation.watchPosition(
-
         function(position) {
-
             const myLat =
                 position.coords.latitude;
-
             const myLng =
                 position.coords.longitude;
-
             const accuracy =
                 position.coords.accuracy;
-
-
             currentPosition = {
-
                 lat: myLat,
-
                 lng: myLng
-
             };
-
-
             updateCurrentMarker(
-
                 myLat,
-
                 myLng,
-
                 accuracy
-
             );
-
-
             if (selectedGoal) {
-
                 showRoute(
-
                     myLat,
-
                     myLng,
-
                     selectedGoal
-
                 );
-
             }
-
         },
 
-
         function(error) {
-
             console.error(
-
                 "位置情報エラー:",
-
                 error
-
             );
 
-
             if (error.code === 1) {
-
                 alert(
                     "位置情報の利用が許可されていません。"
                 );
-
             }
-
             else if (error.code === 2) {
-
                 alert(
                     "現在地を取得できませんでした。"
                 );
-
             }
-
             else if (error.code === 3) {
-
                 alert(
                     "現在地の取得がタイムアウトしました。"
                 );
-
             }
-
         },
 
-
         {
-
             enableHighAccuracy: true,
-
             maximumAge: 0,
-
             timeout: 10000
-
         }
-
     );
-
 }
 
-
-// ========================================
 // 現在地マーカー
-// ========================================
-
 function updateCurrentMarker(
-
     lat,
-
     lng,
-
     accuracy
-
 ) {
-
     const currentIcon = L.divIcon({
-
         className: "current-marker",
-
         html: `
-
             <div class="current-location">
-
             </div>
-
         `,
-
         iconSize: [24, 24],
-
         iconAnchor: [12, 12]
-
     });
 
     // 初回
