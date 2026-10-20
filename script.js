@@ -3,10 +3,13 @@ const map = L.map("map",{
     minZoom:13
 })
 navigator.geolocation.getCurrentPosition(
-    function(position){
+    function(position) {
+
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
-        map.setView([lat,lng],18);
+
+        map.setView([lat, lng], 18);
+
         updateCurrentMarker(
             lat,
             lng,
