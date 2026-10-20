@@ -52,7 +52,7 @@ const goals = [
         lat: 37.947839,
         lng: 139.327160,
         category: "公共施設",
-        icon: "🏛️"
+        icon: "🏢"
     },
     {
         name: "王紋酒造",
@@ -136,7 +136,7 @@ const goals = [
         lat: 37.960376479226,
         lng: 139.35429135822383,
         category: "グルメ",
-        icon: "🍴"
+        icon: "🍶"
     },
     {
         name: "ボン・タケダ",
@@ -192,7 +192,7 @@ const goals = [
         lat: 37.958499803976,
         lng: 139.342528211321,
         category: "グルメ",
-        icon: "🍴"
+        icon: "🍎"
     }
 ];
 
