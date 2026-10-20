@@ -397,11 +397,7 @@ function startNavigation(goal) {
 }
 
 // 現在地マーカー
-function updateCurrentMarker(
-    lat,
-    lng,
-    accuracy
-) {
+function updateCurrentMarker(lat,lng,accuracy) {
     const currentIcon = L.divIcon({
         className: "current-marker",
         html: `
@@ -420,9 +416,8 @@ function updateCurrentMarker(
                 icon: currentIcon
             }
         ).addTo(map);
-        currentMarker.bindPopup(
-           "📍 現在地"
-        );
+        currentMarker.bindPopup("📍 現在地")
+        currentMarker.openPopup();
     }
 
     // 2回目以降
