@@ -511,7 +511,7 @@ async function showRoute(
         const carMinutes = 
             Math.max(
                 1,
-                Math.round(distanceMeter/666.67)
+                Math.round(distanceMeter/500)
             );
 
         // 情報表示
