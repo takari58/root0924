@@ -192,7 +192,7 @@ const goals = [
         lat: 37.958499803976,
         lng: 139.342528211321,
         category: "グルメ",
-        icon: "🍎"
+        icon: "🍴"
     }
 ];
 
