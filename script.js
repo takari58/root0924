@@ -1,9 +1,18 @@
 const map = L.map("map",{
     maxZoom:19,
     minZoom:13
-}).setView(
-    [37.94410134702021, 139.3350867139979],
-    18
+})
+navigator.geolocation.getCurrentPosition(
+    function(position){
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        map.setView([lat,lng],18);
+        updateCurrentMarker(
+            lat,
+            lng,
+            position.coords.accuracy
+        );
+    }
 );
 
 L.tileLayer(
