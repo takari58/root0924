@@ -1,4 +1,3 @@
-//マップ初期表示(新発田駅)
 const map = L.map("map").setView(
     [37.94410134702021, 139.3350867139979],
     17
@@ -12,7 +11,7 @@ L.tileLayer(
 ).addTo(map);
 
 const goals = [
-
+    //カテゴリー：観光、グルメ、交通、公共施設
     {
         name: "新発田城跡",
         lat: 37.954824724543,
@@ -195,16 +194,15 @@ const goals = [
         category: "グルメ",
         icon: "🍴"
     }
-
 ];
 
 const categoryColors = {
     "観光": "#f39c12",
-    "神社・寺": "#8e44ad",
+    //"神社・寺": "#8e44ad",
     "グルメ": "#e74c3c",
     "交通": "#3498db",
     "公共施設": "#27ae60",
-    "温泉": "#00a8cc"
+    //"温泉": "#00a8cc"
 
 };
 
@@ -496,12 +494,24 @@ async function showRoute(
             route.distance;
 
         // 徒歩時間
-        const minutes =
+        const walkMinutes =
             Math.max(
                 1,
                 Math.round(
                     distanceMeter / 66.67
                 )
+            );
+        //自転車
+        const bicycleMinutes = 
+            Math.max(
+                1,
+                Math.round(distanceMeter/250)
+            );
+        //車
+        const carMinutes = 
+            Math.max(
+                1,
+                Math.round(distanceMeter/666.67)
             );
 
         // 情報表示
@@ -519,7 +529,19 @@ async function showRoute(
                     <div>
                         🚶
                         <strong>
-                            約 ${minutes} 分
+                            約 ${walkMinutes} 分
+                        </strong>
+                    </div>
+                    <div>
+                        🚴
+                        <strong>
+                            約 ${bicycleMinutes} 分
+                        </strong>
+                    </div>
+                    <div>
+                        🚙
+                        <strong>
+                            約 ${carMinutes} 分
                         </strong>
                     </div>
                     <div>
@@ -543,7 +565,6 @@ async function showRoute(
                 <div class="route-error">
                     ⚠️ ルート検索に失敗しました
                 </div>
-
             `;
     }
 }
@@ -551,7 +572,6 @@ async function showRoute(
 const categoryButtons =
     document.querySelectorAll(
         ".category-btn"
-
     );
 
 categoryButtons.forEach(button => {
